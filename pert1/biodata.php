@@ -1,4 +1,5 @@
 <?php
+// biodata.php
 function statusKelulusan(float $ipk): string
 {
     if ($ipk >= 3.50) return 'Sangat Memuaskan';
@@ -7,39 +8,30 @@ function statusKelulusan(float $ipk): string
 }
 
 $mahasiswa = [
-    'NIM'       => '4524210037',
-    'Nama'      => 'Farhan Ridwan Badhawi',
-    'Prodi'     => 'Teknik Informatika',
-    'Semester'  => 5,
-    'IPK'       => 3.80,
-    'Predikat'  => statusKelulusan(3.80)
+    'nim' => '2026001',
+    'nama' => 'Andi Pratama',
+    'prodi' => 'Teknik Informatika',
+    'semester' => 1,
+    'ipk' => 3.72
 ];
 ?>
 
 <!doctype html>
 <html lang="id">
+
 <head>
     <meta charset="utf-8">
-    <title>Biodata Mahasiswa</title>
-    <style>
-        body { font-family: sans-serif; background: #f4f4f9; padding: 40px; }
-        .card { background: #fff; max-width: 400px; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        h2 { margin-top: 0; color: #333; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f0f0f0; }
-        .label { font-weight: bold; color: #555; }
-    </style>
+    <title>Biodata</title>
 </head>
+
 <body>
-
-<div class="card">
-    <h2>Biodata Mahasiswa</h2>
-    <?php foreach ($mahasiswa as $label => $nilai): ?>
-        <div class="item">
-            <span class="label"><?= $label ?>:</span>
-            <span><?= htmlspecialchars((string)$nilai) ?></span>
-        </div>
-    <?php endforeach; ?>
-</div>
-
+    <h1>Biodata Mahasiswa</h1>
+    <ul>
+        <?php foreach ($mahasiswa as $kunci => $nilai): ?>
+            <li><?= ucfirst($kunci) ?>: <?= htmlspecialchars((string)$nilai) ?></li>
+        <?php endforeach; ?>
+    </ul>
+    <p>Predikat: <?= statusKelulusan($mahasiswa['ipk']) ?></p>
 </body>
+
 </html>
