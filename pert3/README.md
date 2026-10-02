@@ -8,62 +8,60 @@
 ---
 
 ## 1. Contoh Pertemuan 3
-### A. Contoh akademik
-![Struktur Sebelum Modifikasi](screenshoot/sebelum.png)
-### B. Contoh akademik1
-![Struktur Sebelum Modifikasi](screenshoot/sebelum1.png)
+![Contoh](screenshoot/sebelum1.png)
 
 Seluruh skrip SQL Pertemuan 3 telah berhasil dijalankan tanpa error kritis[cite: 4].
 
 ### Screenshot Sebelum Modifikasi
-![Struktur Sebelum Modifikasi](screenshoot/sebelum1.png)
+### A .![Struktur Sebelum Modifikasi](screenshoot/sblm.png)
+
+### B .![Struktur Sesudah Modifikasi](screenshoot/sblmb.png)
 > *Keterangan: Menampilkan database `akademik1` yang memuat 4 tabel utama (`dosen`, `krs`, `mahasiswa`, `mata_kuliah`)
 
 ---
 
 ## 2. Modifikasi Program
 
-Dua modifikasi bermakna yang ditambahkan pada pangkalan data sesuai materi DDL dan DML[cite: 4, 13, 20]:
+Dua modifikasi struktur tabel (DDL) yang ditambahkan pada pangkalan data[cite: 13, 25]:
 
-* **Modifikasi 1: Penambahan Kolom `no_hp` pada Tabel `mahasiswa` (DDL)**[cite: 2, 4, 13]
-  * **Penjelasan:** Menambahkan kolom `no_hp` bertipe `VARCHAR(15)` pada tabel `mahasiswa` untuk melengkapi informasi kontak mahasiswa.
+* **Modifikasi 1: Penambahan Kolom `tanggal_lahir` pada Tabel `mahasiswa` (DDL)**[cite: 11, 13]
+  * **Penjelasan:** Menambahkan kolom `tanggal_lahir` bertipe data `DATE` setelah kolom `nama` pada tabel `mahasiswa` untuk melengkapi profil mahasiswa[cite: 11, 13].
   * **Kueri SQL:**
     ```sql
     ALTER TABLE mahasiswa 
-    ADD COLUMN no_hp VARCHAR(15) AFTER email;
+    ADD COLUMN tanggal_lahir DATE AFTER nama;
     ```
 
-* **Modifikasi 2: Pengisian Data Sampel Mahasiswa (DML)**
-  * **Penjelasan:** Memasukkan baris data baru ke dalam tabel `mahasiswa` menggunakan perintah `INSERT INTO` untuk menguji penyimpanan data.
+* **Modifikasi 2: Penambahan Kolom `no_telepon` pada Tabel `dosen`**[cite: 11, 13]
+  * **Penjelasan:** Menambahkan kolom `no_telepon` bertipe data `VARCHAR(15)` pada tabel `dosen` untuk menyimpan kontak pengajar[cite: 11, 13].
   * **Kueri SQL:**
     ```sql
-    INSERT INTO mahasiswa (nim, nama, email, prodi, angkatan, ipk, no_hp) VALUES
-    ('2026001', 'Andi Pratama', 'andi@kampus.ac.id', 'Teknik Informatika', 2026, 3.75, '081234567890'),
-    ('2026002', 'Siti Rahma', 'siti@kampus.ac.id', 'Sistem Informasi', 2026, 3.82, '081298765432'),
-    ('2025003', 'Budi Santoso', 'budi@kampus.ac.id', 'Teknik Informatika', 2025, 3.20, '081311223344');
+    ALTER TABLE dosen 
+    ADD COLUMN no_telepon VARCHAR(15);
     ```
 
 ### Screenshot Sesudah Modifikasi
-![Struktur Sesudah Modifikasi](screenshoot/modif1.png)
-![Struktur Sesudah Modifikasi](screenshoot/modif2.png)
-> *Keterangan: Menampilkan kondisi tabel `mahasiswa` setelah penambahan kolom `no_hp` dan pengisian data sampel.*
+### A .![Struktur Sesudah Modifikasi](screenshoot/modif1.png)
+
+### B .![Struktur Sesudah Modifikasi](screenshoot/modif2.png)
+> *Keterangan: Menampilkan struktur tabel `mahasiswa` dan `dosen` di phpMyAdmin setelah penambahan kolom baru melalui perintah ALTER TABLE[cite: 13].*
 
 ---
 
 ## 3. Penjelasan Bagian Kode Penting
 
-Berikut adalah 5 bagian kode SQL paling penting beserta penjelasannya
+Berikut adalah 5 bagian kueri SQL paling penting pada Pertemuan 3 beserta penjelasannya
 
 1. **`CREATE DATABASE IF NOT EXISTS akademik1;`**
-   * **Fungsi:** Membuat database baru bernama `akademik1` jika database tersebut belum tersedia di server.
+   * **Fungsi:** Membuat pangkalan data baru bernama `akademik1` secara otomatis apabila pangkalan data tersebut belum terdaftar
 2. **`PRIMARY KEY`**
-   * **Fungsi:** Menjadikan kolom sebagai identitas unik utama agar tidak ada data ganda
+   * **Fungsi:** Menentukan kolom sebagai identitas unik utama pada tabel agar tidak terjadi duplikasi data
 3. **`FOREIGN KEY ... REFERENCES`**
-   * **Fungsi:** Menghubungkan relasi antar tabel (misalnya kolom `nim` di tabel `krs` merujuk ke `nim` di tabel `mahasiswa`)
+   * **Fungsi:** Membentuk hubungan (relasi) antar tabel, seperti menghubungkan kolom `nim` pada tabel `krs` ke `nim` di tabel `mahasiswa`
 4. **`ON UPDATE CASCADE ON DELETE CASCADE`**
-   * **Fungsi:** Memastikan perubahan atau penghapusan data induk otomatis memperbarui data terkait di tabel turunan
+   * **Fungsi:** Memastikan apabila data utama diubah atau dihapus, perubahan tersebut otomatis diterapkan pada data terkait di tabel turunan
 5. **`CONSTRAINT uq_krs UNIQUE (nim, kode_mk, semester, tahun_ajaran)`**
-   * **Fungsi:** Membatasi agar kombinasi mahasiswa, mata kuliah, semester, dan tahun ajaran tidak bisa terduplikasi
+   * **Fungsi:** Membatasi kombinasi data pengambilan KRS agar tidak terjadi pengambilan mata kuliah yang sama oleh mahasiswa di semester dan tahun ajaran yang sama
 
 ---
 
@@ -72,9 +70,9 @@ Berikut adalah 5 bagian kode SQL paling penting beserta penjelasannya
 
 Langkah penanganan error yang sempat ditemui saat proses pengerjaan:
 
-* **Pesan Error:** `#1046 - No database selected`[cite: 1]
+* **Pesan Error:** `#1046 - No database selected`
 * **Penyebab:** Melakukan impor berkas SQL tanpa memilih atau membuat database tujuan terlebih dahulu di phpMyAdmin
 * **Solusi Perbaikan:**
-  1. Membuat database baru terlebih dahulu (misal: `akademik1`)[cite: 1, 6].
-  2. Mengklik nama database tersebut pada menu sebelah kiri hingga aktif[cite: 1].
+  1. Membuat database baru terlebih dahulu (misal: `akademik1`)
+  2. Mengklik nama database tersebut pada menu sebelah kiri hingga aktif
   3. Mengulang kembali proses impor berkas SQL
