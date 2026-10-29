@@ -17,9 +17,8 @@
  
 | | |
 |---|---|
-| **Nama** | _isi nama kamu_ |
-| **NIM** | _isi NIM kamu_ |
-| **Kelas** | _isi kelas, mis. PBW-B_ |
+| **Nama** | Farhan Ridwan Badhawi|
+| **NIM** | 4524210037 |
 | **Mata Kuliah** | Pemrograman Berbasis Web |
  
 ---
