@@ -1,7 +1,7 @@
 <div align="center">
 # 🛒 Penjualan MVC
  
-**Aplikasi CRUD Produk dengan PHP Native, MySQL, dan Pola MVC**
+**TUGAS MVC MATA KULIAH PEMROGRAMAN BERBASIS WEB**
  
 ![PHP](https://img.shields.io/badge/PHP-8.x-00A8C6?style=for-the-badge&logo=php&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-XAMPP-007A91?style=for-the-badge&logo=mysql&logoColor=white)
